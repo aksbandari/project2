@@ -1,0 +1,192 @@
+//index.jsp
+
+<%@ page import="javax.servlet.http.*, javax.servlet.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="header">
+    <h2>Home Page</h2>
+</div>
+<div class="content">
+    <div class="profile_info">
+        <img src="profile.png" alt="Profile">
+        <div>
+            <strong><%= session.getAttribute("username") %></strong>
+            <small>
+                <a href="logout.jsp">Logout</a>
+            </small>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+//login.jsp
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="header">
+    <h2>Login</h2>
+</div>
+<form method="post" action="auth?action=login">
+    <div class="input-group">
+        <label>Username</label>
+        <input type="text" name="username" required>
+    </div>
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" name="password" required>
+    </div>
+    <div class="input-group">
+        <button type="submit" class="btn">Login</button>
+    </div>
+    <p>
+        Not yet a member? <a href="register.jsp">Sign up</a>
+    </p>
+    <% if (request.getAttribute("error") != null) { %>
+    <div class="error">
+        <%= request.getAttribute("error") %>
+    </div>
+    <% } %>
+</form>
+</body>
+</html>
+
+
+//register.jsp
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="header">
+    <h2>Register</h2>
+</div>
+<form method="post" action="auth?action=register">
+    <div class="input-group">
+        <label>Username</label>
+        <input type="text" name="username" required>
+    </div>
+    <div class="input-group">
+        <label>Email</label>
+        <input type="email" name="email" required>
+    </div>
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" name="password" required>
+    </div>
+    <div class="input-group">
+        <button type="submit" class="btn">Register</button>
+    </div>
+    <p>
+        Already a member? <a href="login.jsp">Sign in</a>
+    </p>
+    <% if (request.getAttribute("error") != null) { %>
+    <div class="error">
+        <%= request.getAttribute("error") %>
+    </div>
+    <% } %>
+</form>
+</body>
+</html>
+
+
+//symptomChecker.jsp
+<%@ page import="javax.servlet.http.*, javax.servlet.*" %>
+<%
+    HttpSession currentSession = request.getSession(false);
+    if (currentSession == null || currentSession.getAttribute("username") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Symptom Checker</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="header">
+    <h2>Symptom Checker</h2>
+</div>
+<form method="post" action="/symptomsearch">
+    <div class="input-group">
+        <label>Symptoms</label>
+        <input type="text" name="symptoms">
+    </div>
+    <div class="input-group">
+        <button type="submit" class="btn">Check</button>
+    </div>
+</form>
+<%
+    if (request.getAttribute("medicines") != null && request.getAttribute("diseases") != null) {
+%>
+    <div class="result">
+        <h3>Medicines: <%= request.getAttribute("medicines") %></h3>
+        <h3>Diseases: <%= request.getAttribute("diseases") %></h3>
+    </div>
+<%
+    } else if (request.getAttribute("symptoms") != null) {
+%>
+    <div class="error">
+        <h3>No results found for: <%= request.getAttribute("symptoms") %></h3>
+    </div>
+<%
+    } else if (request.getAttribute("error") != null) {
+%>
+    <div class="error">
+        <h3>Error: <%= request.getAttribute("error") %></h3>
+    </div>
+<%
+    }
+%>
+</body>
+</html>
+
+
+
+//searchForm.jsp
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Symptom Search</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h2>Symptom Search</h2>
+    </div>
+    <form method="post" action="symptomsearch">
+        <div class="input-group">
+            <label for="symptoms">Enter Symptoms</label>
+            <input type="text" id="symptoms" name="symptoms" required>
+        </div>
+        <div class="input-group">
+            <button type="submit" class="btn">Search</button>
+        </div>
+    </form>
+</body>
+</html>
+
