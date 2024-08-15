@@ -1,0 +1,89 @@
+//style.css
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+form {
+    width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.input-group {
+    margin: 10px 0;
+}
+
+.input-group label {
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.input-group button {
+    width: 100%;
+    padding: 10px;
+    background: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.input-group button:hover {
+    background: #555;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.success {
+    color: green;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile_info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.profile_info strong {
+    font-size: 1.2em;
+}
+
+.profile_info a {
+    color: #333;
+    text-decoration: none;
+}
+
+.profile_info a:hover {
+    text-decoration: underline;
+}
