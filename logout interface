@@ -1,0 +1,12 @@
+
+//logout.jsp
+
+
+<%@ page import="javax.servlet.http.*, javax.servlet.*" %>
+<%
+    // Invalidate the session
+    if (session != null) {
+        session.invalidate();
+    }
+%>
+
